@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "defaultMode": "plan",
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push origin dev*)",
+      "Bash(git push origin prod*)",
+      "Bash(git push origin main*)",
+      "Bash(git push --delete*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .sdlc/scripts/post-edit-check.sh",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .sdlc/scripts/session-context.sh",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}

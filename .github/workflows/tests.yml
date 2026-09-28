@@ -1,0 +1,24 @@
+name: tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Script tests
+        run: bash tests/test-scripts.sh
+      - name: Workflow templates are valid YAML
+        run: |
+          python3 - <<'PY'
+          import yaml, glob
+          for f in glob.glob("templates/.github/workflows/*.yml") + glob.glob(".github/workflows/*.yml"):
+              yaml.safe_load(open(f)); print("ok", f)
+          PY

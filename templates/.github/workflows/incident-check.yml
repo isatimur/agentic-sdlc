@@ -1,0 +1,22 @@
+# incident-check — an incident closes only with a regression CI can see.
+name: incident-check
+
+on:
+  pull_request:
+    paths:
+      - "incidents/**"
+  push:
+    branches: [main, dev]
+    paths:
+      - "incidents/**"
+
+permissions:
+  contents: read
+
+jobs:
+  frontmatter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check incident front matter and regression references
+        run: bash .sdlc/scripts/check-incident-frontmatter.sh incidents

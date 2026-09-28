@@ -1,0 +1,112 @@
+# review-gate — the non-producer reviewer, run on the head SHA, reported as a commit status.
+#
+# Branch protection must list `review-gate` as a required status check. Then no pull request
+# merges without it, from any tool or any human, and a bypass needs an admin override that
+# GitHub logs.
+#
+# Needs: secrets.ANTHROPIC_API_KEY. Permissions below are the minimum.
+# v0.1 honesty: for T2 this posts the Claude verdict only. The second model family and the
+# human approval are provided by CODEOWNERS review, not by this workflow.
+
+name: review-gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+# Permissions: the action's setup guide recommends contents: write; this gate keeps
+# contents: read on purpose — the reviewer must not be able to change the tree it grades.
+# id-token: write is only needed for workload identity federation, not for an API key.
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+  issues: write
+
+concurrency:
+  group: review-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Mark pending on the head SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/statuses/${{ github.event.pull_request.head.sha }}" \
+            -f state=pending -f context=review-gate -f description="review in progress"
+
+      - name: Classify tier from changed paths
+        id: tier
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          TIER=$(git diff --name-only "$BASE" "$HEAD" | bash .sdlc/scripts/classify-change.sh)
+          echo "tier=$TIER" >> "$GITHUB_OUTPUT"
+          echo "Tier: $TIER"
+
+      - name: T2 needs a Spec link
+        if: steps.tier.outputs.tier == 'T2'
+        env:
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          if ! printf '%s' "$BODY" | grep -Eiq '^\*\*Spec:\*\*[[:space:]]*\S'; then
+            echo "::error::T2 change without a Spec: link in the pull request body"
+            exit 1
+          fi
+
+      - name: T0 ships on green tests
+        if: steps.tier.outputs.tier == 'T0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/statuses/${{ github.event.pull_request.head.sha }}" \
+            -f state=success -f context=review-gate -f description="T0: records and prose, no review round required"
+
+      - name: Non-producer review
+        if: steps.tier.outputs.tier != 'T0'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ github.token }}
+          prompt: |
+            You are the review gate for pull request #${{ github.event.pull_request.number }} at head ${{ github.event.pull_request.head.sha }}. Tier: ${{ steps.tier.outputs.tier }}.
+            You did not write this code. You owe it nothing. Read .sdlc/agents/reviewer.md and follow it exactly.
+            Grade every numbered line of the pull request's "Definition of done" against the diff and the tests. Quote the line, then the evidence.
+            Look for silent failures: swallowed errors, defaults that hide a missing value, tests that cannot fail.
+            End your review comment with exactly one line in this form and nothing after it:
+            - **Verdict**: PASS
+            or REVISE or BLOCK. REVISE means fixable gaps, each tied to a numbered clause with the exact sentence or assertion to change. BLOCK means the change must not ship in this shape.
+            Post the review as a single pull request comment.
+          # Read-only toolset: the reviewer may read, search and run read-only git; it may not edit or push.
+          claude_args: "--max-turns 30 --allowedTools Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(ls:*),Bash(cat:*)"
+
+      - name: Parse the verdict and post the status
+        if: steps.tier.outputs.tier != 'T0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          TIER: ${{ steps.tier.outputs.tier }}
+        run: |
+          BODY=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments" --paginate \
+                 --jq '[.[] | select(.body | test("\\*\\*Verdict\\*\\*"))] | last | .body // ""')
+          VERDICT=$(printf '%s' "$BODY" | bash .sdlc/scripts/parse-verdict.sh || true)
+          case "$VERDICT" in
+            PASS)   STATE=success; DESC="$TIER: PASS by non-producer reviewer" ;;
+            REVISE) STATE=failure; DESC="$TIER: REVISE — fix the numbered items, push, the gate re-runs" ;;
+            BLOCK)  STATE=failure; DESC="$TIER: BLOCK — must not ship in this shape" ;;
+            *)      STATE=error;   DESC="no parseable verdict line; the gate failed closed" ;;
+          esac
+          gh api "repos/${GITHUB_REPOSITORY}/statuses/${SHA}" \
+            -f state="$STATE" -f context=review-gate -f description="$DESC"
+          echo "review-gate: $STATE ($DESC)"
+          [ "$STATE" = "success" ]

@@ -1,0 +1,23 @@
+# CODEOWNERS — T2 paths and the humans who must approve them.
+# A path listed here is tier T2 by definition (see .sdlc/tiers.txt for the full map).
+# Branch protection must have "Require review from Code Owners" enabled for this to bind.
+
+# Control plane and CI
+/.github/            @owner-handle
+/.sdlc/              @owner-handle
+/CODEOWNERS          @owner-handle
+/.claude/            @owner-handle
+
+# Infrastructure and identity
+/infra/              @infra-owner-handle
+/terraform/          @infra-owner-handle
+
+# Schema and data
+/src/db/migrations/  @owner-handle
+/prisma/             @owner-handle
+
+# Money, pricing, scoring — anything a domain owner signs off
+/src/billing/        @owner-handle @domain-owner-handle
+
+# Deploy configuration
+/.github/workflows/build-prod.yaml   @owner-handle @infra-owner-handle
