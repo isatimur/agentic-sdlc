@@ -2,6 +2,11 @@
 
 Governed numbers and rules live in `SDLC.md`. A change to a number is a minor version; a change to a rule is a major version. Every entry names what changed and why.
 
+## 0.1.1 — 2026-09-30
+
+- `review-gate` picks the reviewer model by tier: `claude-opus-5-5` for T2 verdicts, `claude-sonnet-5-5` for T1. Grading a well-specified definition of done does not need the frontier model; a T2 verdict does. The `reviewer` subagent's default model is now `claude-sonnet-5-5` for local use.
+- First CI run of the `tests` workflow on GitHub passed (2026-09-29).
+
 ## 0.1.0 — 2026-09-28
 
 First cut, extracted from an agency-wide design after an audit found its ship gate guarding the wrong boundary (a laptop hook instead of the remote).

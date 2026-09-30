@@ -87,7 +87,8 @@ jobs:
             or REVISE or BLOCK. REVISE means fixable gaps, each tied to a numbered clause with the exact sentence or assertion to change. BLOCK means the change must not ship in this shape.
             Post the review as a single pull request comment.
           # Read-only toolset: the reviewer may read, search and run read-only git; it may not edit or push.
-          claude_args: "--max-turns 30 --allowedTools Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(ls:*),Bash(cat:*)"
+          # Model by tier: T2 verdicts get the frontier model; T1 review is well-specified grading and runs on Sonnet.
+          claude_args: "--model ${{ steps.tier.outputs.tier == 'T2' && 'claude-opus-5-5' || 'claude-sonnet-5-5' }} --max-turns 30 --allowedTools Read,Grep,Glob,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(ls:*),Bash(cat:*)"
 
       - name: Parse the verdict and post the status
         if: steps.tier.outputs.tier != 'T0'
