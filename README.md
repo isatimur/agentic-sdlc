@@ -24,6 +24,8 @@ Read [`SDLC.md`](SDLC.md) first. It is the whole method: three tiers, seven stag
 | `scripts/check-incident-frontmatter.sh` | the incident closure rule, runnable locally and in CI |
 | `install.sh` | copies the templates into a target repository and prints the branch-protection settings a human must set |
 
+`SDLC.md`'s Claude Code mapping table has a "model by job" row: Haiku 5.5 for classification and exploration, Sonnet 5.5 for builds and T1 review, Opus 5.5 for T2 verdicts and architecture. The `review-gate` workflow follows it — Opus 5.5 grades T2 verdicts, Sonnet 5.5 grades T1.
+
 ## Install into a repository
 
 ```bash
