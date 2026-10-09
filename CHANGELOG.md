@@ -2,6 +2,10 @@
 
 Governed numbers and rules live in `SDLC.md`. A change to a number is a minor version; a change to a rule is a major version. Every entry names what changed and why.
 
+## 0.1.3 — 2026-10-10
+
+- Documentation only. Two diagrams under `docs/` (`agentic-sdlc.png`, the whole method on one page; `gate-on-the-remote.png`, why a local hook cannot be the control), both with editable `.excalidraw` sources. README gains "Why the gate lives on the remote" and "Honest limits" (GitHub plan requirement for branch protection on private repositories, the workflow's untested-in-a-consumer status, path-only tiering, unscripted bypass counting). No behaviour changed.
+
 ## 0.1.2 — 2026-10-09
 
 - `reviewer` carries `effort: high`. `SDLC.md` gains a "model by job" row: Haiku 5.5 for classification and exploration, Sonnet 5.5 for builds and T1 review, Opus 5.5 for T2 verdicts; effort before model. Source: Anthropic's models overview and choosing-a-model pages, read after the Haiku 5.5 release of 2026-10-07.

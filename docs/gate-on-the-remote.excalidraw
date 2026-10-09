@@ -1,0 +1,26 @@
+{
+  "type": "excalidraw-skeleton",
+  "elements": [
+    { "type": "text", "id": "title", "x": 40, "y": 24, "text": "WHY THE GATE LIVES ON THE REMOTE", "fontSize": 26, "strokeColor": "#0f172a" },
+
+    { "type": "rectangle", "id": "before", "x": 40, "y": 80, "width": 640, "height": 300, "strokeColor": "#b91c1c", "backgroundColor": "#fef2f2", "roughness": 0, "strokeWidth": 2 },
+    { "type": "text", "id": "before_t", "x": 60, "y": 95, "text": "A GATE ON ONE MACHINE", "fontSize": 18, "strokeColor": "#b91c1c" },
+    { "type": "rectangle", "id": "laptop", "x": 70, "y": 140, "width": 240, "height": 60, "strokeColor": "#334155", "backgroundColor": "#e2e8f0", "roughness": 0, "strokeWidth": 1, "label": { "text": "a local hook parses the\nagent's `git push` strings", "fontSize": 14 } },
+    { "type": "rectangle", "id": "github_b", "x": 400, "y": 140, "width": 240, "height": 60, "strokeColor": "#334155", "backgroundColor": "#e2e8f0", "roughness": 0, "strokeWidth": 1, "label": { "text": "GitHub · the merge button\nknows nothing about it", "fontSize": 14 } },
+    { "type": "arrow", "id": "b_gap", "x": 310, "y": 170, "width": 90, "height": 0, "strokeColor": "#b91c1c", "strokeStyle": "dashed", "strokeWidth": 2, "roughness": 0, "start": { "id": "laptop" }, "end": { "id": "github_b" }, "label": { "text": "no link", "fontSize": 13 } },
+    { "type": "text", "id": "before_b", "x": 60, "y": 225, "text": "sees one tool on one machine; the web UI, a second agent,\na teammate's terminal and any other clone never meet it\nevery new transport is a new parser rule: an arms race\nthe verdict lives in a local file nobody else can read\na bypass leaves no trace where the merge happened", "fontSize": 15, "strokeColor": "#0f172a" },
+
+    { "type": "arrow", "id": "ba", "x": 680, "y": 230, "width": 60, "height": 0, "strokeColor": "#047857", "strokeWidth": 3, "roughness": 0, "start": { "id": "before" }, "end": { "id": "after" } },
+
+    { "type": "rectangle", "id": "after", "x": 740, "y": 80, "width": 640, "height": 300, "strokeColor": "#047857", "backgroundColor": "#ecfdf5", "roughness": 0, "strokeWidth": 2 },
+    { "type": "text", "id": "after_t", "x": 760, "y": 95, "text": "A REQUIRED STATUS ON THE HEAD SHA", "fontSize": 18, "strokeColor": "#047857" },
+    { "type": "rectangle", "id": "pr", "x": 770, "y": 140, "width": 180, "height": 60, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "pull request\nhead SHA", "fontSize": 14 } },
+    { "type": "rectangle", "id": "rg", "x": 980, "y": 140, "width": 190, "height": 60, "strokeColor": "#6d28d9", "backgroundColor": "#ddd6fe", "roughness": 0, "strokeWidth": 1, "label": { "text": "review-gate Action\nnon-producer verdict", "fontSize": 14 } },
+    { "type": "rectangle", "id": "bp", "x": 1200, "y": 140, "width": 160, "height": 60, "strokeColor": "#b45309", "backgroundColor": "#fef3c7", "roughness": 0, "strokeWidth": 2, "label": { "text": "branch protection\nrequired status", "fontSize": 14 } },
+    { "type": "arrow", "id": "a1", "x": 950, "y": 170, "width": 30, "height": 0, "strokeColor": "#1e3a5f", "strokeWidth": 2, "roughness": 0, "start": { "id": "pr" }, "end": { "id": "rg" } },
+    { "type": "arrow", "id": "a2", "x": 1170, "y": 170, "width": 30, "height": 0, "strokeColor": "#047857", "strokeWidth": 2, "roughness": 0, "start": { "id": "rg" }, "end": { "id": "bp" } },
+    { "type": "text", "id": "after_b", "x": 760, "y": 225, "text": "the merge button is disabled for every tool and every human\nuntil `review-gate` and `tests` are green on that exact SHA\nthe verdict is a PR comment + a commit status: the ledger is GitHub\na bypass needs an admin override, which GitHub logs\nno parser, no allowlist, no copy of the hook to keep in sync", "fontSize": 15, "strokeColor": "#0f172a" },
+
+    { "type": "text", "id": "foot", "x": 40, "y": 410, "text": "The local hook can stay as a convenience. It is never the control. Control is whatever sees every merge, from every tool, by every person.", "fontSize": 15, "strokeColor": "#64748b" }
+  ]
+}

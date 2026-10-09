@@ -4,6 +4,16 @@ A two-page software development lifecycle for small teams that build with coding
 
 Read [`SDLC.md`](SDLC.md) first. It is the whole method: three tiers, seven stages with one artifact each, seven governed numbers, five rules.
 
+![The agentic SDLC on one page: seven stages with their artifact, what a machine enforces at each, the Claude Code primitive and model per stage; three tiers; seven numbers; five rules; what GitHub sees on a gated pull request](docs/agentic-sdlc.png)
+
+## Why the gate lives on the remote
+
+![A gate on one machine parses one tool's push commands and has no link to the merge button; a required status on the head SHA is enforced for every tool and every human](docs/gate-on-the-remote.png)
+
+A gate that runs on one machine sees one tool. The web UI, a second agent, a teammate's terminal and every other clone never meet it. Every new way to push is a new parser rule, so the hook grows and still leaks. Its verdict lives in a local file nobody else can read, and a bypass leaves no trace where the merge actually happened.
+
+A required status check on the head SHA has none of those problems. The merge button is disabled for every tool and every human until `review-gate` and your test job are green on that exact commit. The verdict is a pull request comment plus a commit status, so GitHub is the ledger. A bypass needs an admin override, which GitHub logs. There is no parser, no allowlist and no copy of a hook to keep in sync. The local hook can stay as a convenience; it is never the control.
+
 ## What is in the kit
 
 | Path | What it is |
@@ -41,6 +51,14 @@ Then, once, on GitHub (a human with admin rights):
 3. Fill `CODEOWNERS` with your T2 paths and approvers.
 
 `install.sh` prints these three steps with your branch name filled in.
+
+## Honest limits
+
+- Branch protection and required status checks are available on public repositories under GitHub Free, and on private repositories only with GitHub Pro, Team or Enterprise. On a private repository under Free, the `review-gate` status is informative, not enforced.
+- The `review-gate` workflow has passed this repository's own CI but has not yet gated a pull request in a consumer repository. The first consumer proves it; until then treat it as 0.1.
+- For T2 the workflow posts one model's verdict. The second model family and the human approval come from Code Owner review, not from the workflow.
+- The tier classifier matches paths, not diff content. A dangerous change under a harmless path is a T1 until a human raises it in the pull request, which the template asks for.
+- Bypass counting from the GitHub API is described in `SDLC.md` and not yet scripted.
 
 ## What the kit deliberately does not contain
 

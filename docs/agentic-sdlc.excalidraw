@@ -1,0 +1,66 @@
+{
+  "type": "excalidraw-skeleton",
+  "elements": [
+    { "type": "text", "id": "title", "x": 40, "y": 24, "text": "THE AGENTIC SDLC — seven stages, one artifact each, and the gate lives on the remote", "fontSize": 30, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "subtitle", "x": 40, "y": 66, "text": "For 1–5 engineers plus coding agents, shipping through GitHub. Nothing that runs on one laptop, parses command strings, or depends on which tool pushed can be the control.", "fontSize": 17, "strokeColor": "#64748b" },
+
+    { "type": "text", "id": "s1_lbl", "x": 40, "y": 120, "text": "1 · STAGES — what each one commits, who approves, what a machine enforces", "fontSize": 16, "strokeColor": "#64748b" },
+    { "type": "rectangle", "id": "st1", "x": 40, "y": 160, "width": 230, "height": 70, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "1 · INTENT", "fontSize": 17 } },
+    { "type": "rectangle", "id": "st2", "x": 300, "y": 160, "width": 230, "height": 70, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "2 · PLAN", "fontSize": 17 } },
+    { "type": "rectangle", "id": "st3", "x": 560, "y": 160, "width": 230, "height": 70, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "3 · BUILD", "fontSize": 17 } },
+    { "type": "rectangle", "id": "st4", "x": 820, "y": 160, "width": 230, "height": 70, "strokeColor": "#6d28d9", "backgroundColor": "#ddd6fe", "roughness": 0, "strokeWidth": 2, "label": { "text": "4 · VERIFY", "fontSize": 17 } },
+    { "type": "rectangle", "id": "st5", "x": 1080, "y": 160, "width": 230, "height": 70, "strokeColor": "#b45309", "backgroundColor": "#fef3c7", "roughness": 0, "strokeWidth": 3, "label": { "text": "5 · MERGE", "fontSize": 17 } },
+    { "type": "rectangle", "id": "st6", "x": 1340, "y": 160, "width": 230, "height": 70, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "6 · RELEASE", "fontSize": 17 } },
+    { "type": "rectangle", "id": "st7", "x": 1600, "y": 160, "width": 230, "height": 70, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "7 · MONITOR", "fontSize": 17 } },
+    { "type": "arrow", "id": "a12", "x": 270, "y": 195, "width": 30, "height": 0, "strokeColor": "#1e3a5f", "strokeWidth": 2, "roughness": 0, "start": { "id": "st1" }, "end": { "id": "st2" } },
+    { "type": "arrow", "id": "a23", "x": 530, "y": 195, "width": 30, "height": 0, "strokeColor": "#1e3a5f", "strokeWidth": 2, "roughness": 0, "start": { "id": "st2" }, "end": { "id": "st3" } },
+    { "type": "arrow", "id": "a34", "x": 790, "y": 195, "width": 30, "height": 0, "strokeColor": "#1e3a5f", "strokeWidth": 2, "roughness": 0, "start": { "id": "st3" }, "end": { "id": "st4" } },
+    { "type": "arrow", "id": "a45", "x": 1050, "y": 195, "width": 30, "height": 0, "strokeColor": "#1e3a5f", "strokeWidth": 2, "roughness": 0, "start": { "id": "st4" }, "end": { "id": "st5" } },
+    { "type": "arrow", "id": "a56", "x": 1310, "y": 195, "width": 30, "height": 0, "strokeColor": "#047857", "strokeWidth": 2, "roughness": 0, "start": { "id": "st5" }, "end": { "id": "st6" } },
+    { "type": "arrow", "id": "a67", "x": 1570, "y": 195, "width": 30, "height": 0, "strokeColor": "#047857", "strokeWidth": 2, "roughness": 0, "start": { "id": "st6" }, "end": { "id": "st7" } },
+    { "type": "arrow", "id": "a71", "x": 1715, "y": 230, "width": -1560, "height": 0, "strokeColor": "#94a3b8", "strokeStyle": "dashed", "strokeWidth": 1, "roughness": 0, "points": [[0, 0], [0, 18], [-1560, 18], [-1560, 0]], "start": { "id": "st7" }, "end": { "id": "st1" } },
+    { "type": "text", "id": "loop_lbl", "x": 900, "y": 250, "text": "an incident re-enters as new intent", "fontSize": 13, "strokeColor": "#94a3b8" },
+
+    { "type": "text", "id": "row_art", "x": 40, "y": 285, "text": "ARTIFACT", "fontSize": 13, "strokeColor": "#94a3b8" },
+    { "type": "text", "id": "art1", "x": 40, "y": 305, "text": "T1: ticket with a\ndefinition of done\nT2: spec/ADR with threat\nmodel and rollback", "fontSize": 14, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "art2", "x": 300, "y": 305, "text": "the plan in the PR body:\nwhat it touches,\nwhat it could break", "fontSize": 14, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "art3", "x": 560, "y": 305, "text": "branch + commits\n(small PRs, one commit\nat hand-over)", "fontSize": 14, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "art4", "x": 820, "y": 305, "text": "PR review comment with a\nper-clause verdict +\nreview-gate commit status\non the head SHA", "fontSize": 14, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "art5", "x": 1080, "y": 305, "text": "the merge commit —\ntree identical to the\ngraded tree", "fontSize": 14, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "art6", "x": 1340, "y": 305, "text": "deploy record:\ntag + changelog", "fontSize": 14, "strokeColor": "#0f172a" },
+    { "type": "text", "id": "art7", "x": 1600, "y": 305, "text": "alert config +\nincidents/ file with\nstatus: and regression:\nfront matter", "fontSize": 14, "strokeColor": "#0f172a" },
+
+    { "type": "text", "id": "row_enf", "x": 40, "y": 395, "text": "MACHINE ENFORCES", "fontSize": 13, "strokeColor": "#047857" },
+    { "type": "text", "id": "enf1", "x": 40, "y": 415, "text": "CI: T2 PR must carry\na Spec: link", "fontSize": 14, "strokeColor": "#047857" },
+    { "type": "text", "id": "enf2", "x": 300, "y": 415, "text": "nothing —\nplan mode is a convention\nwith a default", "fontSize": 14, "strokeColor": "#64748b" },
+    { "type": "text", "id": "enf3", "x": 560, "y": 415, "text": "permissions.deny on\nforce-push and direct push;\nPostToolUse: format + tests", "fontSize": 14, "strokeColor": "#047857" },
+    { "type": "text", "id": "enf4", "x": 820, "y": 415, "text": "CI posts the status only\nfrom a verdict that parses:\n- **Verdict**: PASS|REVISE|BLOCK", "fontSize": 14, "strokeColor": "#047857" },
+    { "type": "text", "id": "enf5", "x": 1080, "y": 415, "text": "BRANCH PROTECTION:\nrequired tests + review-gate\non the head SHA;\nCODEOWNERS approval for T2", "fontSize": 14, "strokeColor": "#b45309" },
+    { "type": "text", "id": "enf6", "x": 1340, "y": 415, "text": "protected environment\napproval in GitHub;\nnamed human go/no-go", "fontSize": 14, "strokeColor": "#047857" },
+    { "type": "text", "id": "enf7", "x": 1600, "y": 415, "text": "CI: status: closed needs\nan existing test path or\na named control", "fontSize": 14, "strokeColor": "#047857" },
+
+    { "type": "text", "id": "row_cc", "x": 40, "y": 505, "text": "CLAUDE CODE PRIMITIVE · MODEL", "fontSize": 13, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc1", "x": 40, "y": 525, "text": "CLAUDE.md ≤ 100 lines,\n@import of SDLC.md", "fontSize": 14, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc2", "x": 300, "y": 525, "text": "plan mode\n(defaultMode: plan),\nPlan subagent · Sonnet", "fontSize": 14, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc3", "x": 560, "y": 525, "text": "subagents with\nisolation: worktree,\nPostToolUse hook · Sonnet", "fontSize": 14, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc4", "x": 820, "y": 525, "text": "read-only reviewer\nsubagent, or the Action ·\nSonnet for T1, Opus for T2", "fontSize": 14, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc5", "x": 1080, "y": 525, "text": "none —\nserver-side is the point", "fontSize": 14, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc6", "x": 1340, "y": 525, "text": "none", "fontSize": 14, "strokeColor": "#6d28d9" },
+    { "type": "text", "id": "cc7", "x": 1600, "y": 525, "text": "alerts; SessionStart\ninjects open PRs +\nincidents (not a lock) · Haiku\nfor classification", "fontSize": 14, "strokeColor": "#6d28d9" },
+
+    { "type": "text", "id": "s2_lbl", "x": 40, "y": 630, "text": "2 · TIERS — the riskiest path touched sets the tier; CI computes it", "fontSize": 16, "strokeColor": "#64748b" },
+    { "type": "rectangle", "id": "t0", "x": 40, "y": 670, "width": 560, "height": 60, "strokeColor": "#334155", "backgroundColor": "#f1f5f9", "roughness": 0, "strokeWidth": 1, "label": { "text": "T0 · records and prose — docs, incidents, ADR text → ships on green tests", "fontSize": 14 } },
+    { "type": "rectangle", "id": "t1", "x": 40, "y": 740, "width": 560, "height": 60, "strokeColor": "#1e3a5f", "backgroundColor": "#bfdbfe", "roughness": 0, "strokeWidth": 1, "label": { "text": "T1 · app code to the integration branch — one non-producer review", "fontSize": 14 } },
+    { "type": "rectangle", "id": "t2", "x": 40, "y": 810, "width": 560, "height": 84, "strokeColor": "#b45309", "backgroundColor": "#fef3c7", "roughness": 0, "strokeWidth": 2, "label": { "text": "T2 · blast radius — control plane, CI, infra, IAM, schema, billing,\npromotion to production, customer-facing, irreversible → spec first,\nsecond model family or a human, Code Owner approval, rollback shown", "fontSize": 14 } },
+
+    { "type": "text", "id": "s3_lbl", "x": 660, "y": 630, "text": "3 · SEVEN NUMBERS", "fontSize": 16, "strokeColor": "#64748b" },
+    { "type": "text", "id": "numbers", "x": 660, "y": 665, "text": "1  review-round ceiling: T1 = 2, T2 = 3\n2  at the ceiling: ship bounded / kill / human-capped waiver — never a 4th round\n3  PASS floor: one number per tier, not per lens\n4  second model family: T2 only\n5  PR age limit: 48h, then intake pauses\n6  spend cap: per session, enforced by the provider, not prose\n7  tier map: paths → T0 / T1 / T2, in CODEOWNERS and .sdlc/tiers.txt", "fontSize": 14, "strokeColor": "#0f172a" },
+
+    { "type": "text", "id": "s4_lbl", "x": 1340, "y": 630, "text": "4 · FIVE RULES", "fontSize": 16, "strokeColor": "#64748b" },
+    { "type": "text", "id": "rules", "x": 1340, "y": 665, "text": "1  no merge without the required status on the head SHA\n2  a bypass is an incident, even when the output was fine\n3  no re-roll on an unchanged SHA — fix the artifact\n4  an incident closes only with a test or control CI checks\n5  T2 changes need a spec before code", "fontSize": 14, "strokeColor": "#0f172a" },
+
+    { "type": "rectangle", "id": "evidence", "x": 1340, "y": 800, "width": 860, "height": 100, "strokeColor": "#334155", "backgroundColor": "#1e293b", "roughness": 0, "strokeWidth": 1 },
+    { "type": "text", "id": "ev_t", "x": 1356, "y": 812, "text": "what GitHub sees on the PR", "fontSize": 14, "strokeColor": "#4ade80" },
+    { "type": "text", "id": "ev_b", "x": 1356, "y": 838, "text": "✓ tests            head 3f9c2e1   passed in 4m12s\n✓ review-gate      head 3f9c2e1   PASS · tier T1 · reviewer: non-producer · round 1/2\n  - **Verdict**: PASS   DoD 1 ✓  DoD 2 ✓  DoD 3 ✓  silent-failure branches: none found", "fontSize": 14, "strokeColor": "#e2e8f0" }
+  ]
+}
