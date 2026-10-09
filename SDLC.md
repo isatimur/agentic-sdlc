@@ -76,3 +76,4 @@ Never pull requests opened, agents run, or lines written.
 | Non-producer review | a reviewer subagent with read-only tools, or the `review-gate` GitHub Action | the verdict counts only when it lands as a commit status |
 | The gate | branch protection and required checks | the only control that sees every merge, from every tool and every human |
 | Context at session start | a SessionStart hook | injects open pull requests and incidents; cannot block |
+| Model by job | `model:` and `effort:` on every subagent; `--model` in the gate workflow | Haiku for classification, extraction and exploration; Sonnet for builds and T1 review; Opus for T2 verdicts and architecture. Effort is the first lever, the model the second |

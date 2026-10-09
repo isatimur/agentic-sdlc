@@ -2,6 +2,10 @@
 
 Governed numbers and rules live in `SDLC.md`. A change to a number is a minor version; a change to a rule is a major version. Every entry names what changed and why.
 
+## 0.1.2 — 2026-10-09
+
+- `reviewer` carries `effort: high`. `SDLC.md` gains a "model by job" row: Haiku 5.5 for classification and exploration, Sonnet 5.5 for builds and T1 review, Opus 5.5 for T2 verdicts; effort before model. Source: Anthropic's models overview and choosing-a-model pages, read after the Haiku 5.5 release of 2026-10-07.
+
 ## 0.1.1 — 2026-09-30
 
 - `review-gate` picks the reviewer model by tier: `claude-opus-5-5` for T2 verdicts, `claude-sonnet-5-5` for T1. Grading a well-specified definition of done does not need the frontier model; a T2 verdict does. The `reviewer` subagent's default model is now `claude-sonnet-5-5` for local use.
